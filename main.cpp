@@ -60,7 +60,7 @@ int login()                                                     //Log in functio
     string buf1;
     while (getline(ifs, buf1)) {                           //Loop twice to read validation
         string validation;
-        cout << "input:(first time is the User name£¬second time is password)" << endl;
+        cout << "input:(first time is the User nameï¼Œsecond time is password)" << endl;
         cin >> validation;
         if (validation != buf1)                              //Error feedback
         {
@@ -253,7 +253,7 @@ public:
 class find_files : public product {
     string chose(string input) override {
         string mode;
-        cout << "enter file model£¨like£º//*.txt£©" << endl;
+        cout << "enter file modelï¼ˆlikeï¼š//*.txtï¼‰" << endl;
         cin >> mode;
         file_search(PATH, mode);
         cout << "--------------------------------------------" << endl;
@@ -280,16 +280,17 @@ class pwd : public product {
     }
 };
 
-class not_find:public product{
-    string chose(string input) override{
-        cout<<"commend no find,please try again"<<endl;
+class not_find : public product {
+    string chose(string input) override {
+        cout << "commend no find,please try again" << endl;
         return "down";
     }
 };
+
 class Factory {                              // Define the FACTORY. Everything is determined in the FACTORY
 public:
     static product *created(const string &input) {
-        if (input == "watch") {
+        if (input == "wl") {
             return new watch;
         }
         if (input == "new") {
@@ -301,7 +302,7 @@ public:
         if (input == "word_color") {
             return new word_color;
         }
-        if (input == "system-dos") {
+        if (input == "sd") {
             return new system_dos;
         }
         if (input == "power") {
@@ -313,10 +314,10 @@ public:
         if (input == "find") {
             return new find_files;
         }
-        if (input == "look") {
+        if (input == "lfinside") {
             return new cat_files;
         }
-        if (input == "directory") {
+        if (input == "ld") {
             return new pwd;
         } else {
             return new not_find;
@@ -326,14 +327,15 @@ public:
 
 class w_worksh {
 public:
-    [[noreturn]] void warehouse() const {        // This indicates that this is an infinite loop function
+    void warehouse() const {        // This indicates that this is an infinite loop function
         if (!cat) {
             cout << "worksh is starting work" << endl;
             release();
             string input;
-            while (true) {
+            while (input != "power_off") {
+                cout << PATH << "%%user:";
                 cin >> input;
-                cout<<Factory::created(input)->chose(input)<<endl;
+                cout << Factory::created(input)->chose(input) << endl;
             }
         }
         if (!nest) {
@@ -405,7 +407,7 @@ int main() {
         cout << "login:" << endl;
         login();
     } else if (active == 'N') {
-        login();
+
     } else {
         return 0;
     }
