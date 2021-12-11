@@ -60,7 +60,7 @@ int login()                                                     //Log in functio
     string buf1;
     while (getline(ifs, buf1)) {                           //Loop twice to read validation
         string validation;
-        cout << "input:(first time is the User name，second time is password)" << endl;
+        cout << "input:(first time is the User name,second time is password)" << endl;
         cin >> validation;
         if (validation != buf1)                              //Error feedback
         {
@@ -77,7 +77,7 @@ int login()                                                     //Log in functio
 void release() {
     ofstream ofs;
     ofs.open(R"(C:\ProgramData\lava\nest\release.txt)");
-    ofs << "release 0.1.01 SV [standard version]" << endl;
+    ofs << "release 0.1.02 SV [standard version]" << endl;
     ofs << "by CN_rh1" << endl;
 }
 
@@ -109,7 +109,7 @@ void file_search(string path, const string &mode) {
     _findclose(handle);    //Don't forget to close the handle
 }
 
-void readTxt(string file) {
+void readTxt(const string &file) {
     ifstream infile;
     infile.open(file.data());   //Connect a file stream object to a file
     assert(infile.is_open());   //If it fails, an error message is output and the program is terminated
@@ -231,7 +231,7 @@ public:
 class change_directory : public product {
 public:
     string chose(string input) override {
-        cout << "which path do you want?" << endl;
+        cout << "   ";
         string path;
         cin >> path;
         if (path == "nest") {
@@ -242,7 +242,7 @@ public:
             PATH = R"(C:\ProgramData\lava\user\)";
         }
         if (path == "else") {
-            cout << "input path:" << endl;
+            cout << "input path:" << "   " << endl;
             cin >> PATH;
         }
         cout << "--------------------------------------------" << endl;
@@ -253,7 +253,7 @@ public:
 class find_files : public product {
     string chose(string input) override {
         string mode;
-        cout << "enter file model（like：//*.txt）" << endl;
+        cout << "   ";
         cin >> mode;
         file_search(PATH, mode);
         cout << "--------------------------------------------" << endl;
@@ -263,7 +263,7 @@ class find_files : public product {
 
 class cat_files : public product {
     string chose(string input) override {
-        cout << "enter your file name?" << endl;
+        cout << "   ";
         string name;
         cin >> name;
         readTxt(PATH + name);
