@@ -7,7 +7,8 @@
 #include<windows.h>
 #include<cmath>
 #include<cassert>
-
+#include"CPUusage.h"
+//head own
 using namespace std;
 string PATH = R"(C:\ProgramData\lava\user\)";               //Global variable PATH  /* NOLINT */
 
@@ -287,6 +288,25 @@ class not_find : public product {
     }
 };
 
+class cpu : public product {
+    string chose(string input) override {
+        CPUusage usg(12316);
+        for (int i = 0; i < 10; i++) {
+            float cpu = usg.get_cpu_usage();
+            printf("Taskmgr.exe: %.2f%%\n", cpu);
+            Sleep(500);
+        }
+
+        usg.setpid(11084);
+        for (int i = 0; i < 10; i++) {
+            float cpu = usg.get_cpu_usage();
+            printf("devenv.exe: %.2f%%\n", cpu);
+            Sleep(1000);
+        }
+        return "down";
+    }
+};
+
 class Factory {                              // Define the FACTORY. Everything is determined in the FACTORY
 public:
     static product *created(const string &input) {
@@ -319,6 +339,9 @@ public:
         }
         if (input == "ld") {
             return new pwd;
+        }
+        if (input == "lcpu") {
+            return new cpu;
         } else {
             return new not_find;
         }
