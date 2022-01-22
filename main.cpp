@@ -4,7 +4,7 @@
 #include<conio.h>       //Used to monitor user keyboard events
 #include<io.h>
 #include<vector>
-#include<windows.h>
+#include<Windows.h>
 #include<cmath>
 #include<cassert>
 #include"CPUusage.h"
